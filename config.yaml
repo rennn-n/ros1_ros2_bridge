@@ -1,0 +1,17 @@
+rate: 0.1
+ros1_to_ros2:
+  - name: /chatter
+    ros1_type: std_msgs/String
+    ros2_type: std_msgs/msg/String
+
+  - name: /chatter1
+    ros1_type: std_msgs/String
+    ros2_type: std_msgs/msg/String
+ros2_to_ros1:
+  - name: /chatter
+    ros1_type: std_msgs/String
+    ros2_type: std_msgs/msg/String
+
+  - name: /chatter1
+    ros1_type: std_msgs/String
+    ros2_type: std_msgs/msg/String

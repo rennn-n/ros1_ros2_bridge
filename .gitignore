@@ -1,0 +1,24 @@
+# General
+*~
+\#*#
+*.o
+*.aux
+*.dvi
+*.log
+*.synctex.gz
+*.pdf
+\.nfs0000*
+\..*
+
+# for ROS,ROS2
+**/build/**
+**/install/**
+**/devel/**
+**/log/**
+**/logs/**
+**/__pycache__/**
+**/.catkin_tools/** 
+
+
+# vscode
+.vscode
