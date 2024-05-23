@@ -1,0 +1,1 @@
+docker build  $(dirname $0)/../ -t ros1_ros2_bridge 

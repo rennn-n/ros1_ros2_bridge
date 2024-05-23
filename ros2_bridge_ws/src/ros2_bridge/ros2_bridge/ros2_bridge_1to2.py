@@ -8,7 +8,6 @@ import yaml
 import rclpy
 from rclpy.node import Node
 from rclpy_message_converter import json_message_converter
-from ament_index_python.packages import get_package_share_directory
 
 from rosidl_runtime_py.utilities import get_message
 
@@ -17,7 +16,7 @@ class Json2MsgNode(Node):
     def __init__(self) -> None:
         super().__init__("ros2_bridge_1to2")
 
-        conf_path = get_package_share_directory('ros2_bridge') + "/.."*5 +"/config.yaml"
+        conf_path = "/config.yaml"
         with open(conf_path) as file:
             config = yaml.safe_load(file.read())
                 

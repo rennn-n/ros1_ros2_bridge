@@ -11,7 +11,7 @@ from rospy_message_converter import json_message_converter
 
 class Msg2JsonNode():
     def __init__(self) -> None:
-        conf_path = roslib.packages.get_pkg_dir("ros1_bridge") + "/.."*3 +"/config.yaml"
+        conf_path = "/config.yaml"
         with open(conf_path) as file:
             config = yaml.safe_load(file.read())
         

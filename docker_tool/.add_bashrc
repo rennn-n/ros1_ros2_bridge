@@ -1,0 +1,8 @@
+function rs1(){
+    source /opt/ros/noetic/setup.bash
+    source ~/ros1_bridge_ws/devel/setup.bash
+}
+function rs2(){
+    source /opt/ros/galactic/setup.bash
+    source ~/ros2_bridge_ws/install/setup.bash
+}
