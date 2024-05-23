@@ -3,15 +3,13 @@ ros1_to_ros2:
   - name: /chatter
     ros1_type: std_msgs/String
     ros2_type: std_msgs/msg/String
-
-  - name: /chatter1
-    ros1_type: std_msgs/String
-    ros2_type: std_msgs/msg/String
+  - name: /points_raw
+    ros1_type: sensor_msgs/PointCloud2
+    ros2_type: sensor_msgs/msg/PointCloud2
 ros2_to_ros1:
   - name: /chatter
     ros1_type: std_msgs/String
     ros2_type: std_msgs/msg/String
-
-  - name: /chatter1
-    ros1_type: std_msgs/String
-    ros2_type: std_msgs/msg/String
+  - name: /points_raw
+    ros1_type: sensor_msgs/PointCloud2
+    ros2_type: sensor_msgs/msg/PointCloud2

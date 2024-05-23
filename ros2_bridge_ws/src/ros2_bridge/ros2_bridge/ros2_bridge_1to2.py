@@ -44,14 +44,12 @@ class Json2MsgNode(Node):
 
 
     def callback(self,i) -> None:
-        
         if self.pre_modified[i] != rtn_modified_time(self.json_paths[i]):
             try:
                 json_open = open(self.json_paths[i], 'r')
                 try:
                     json_load = json.load(json_open)
-                    ros_msg = json_message_converter.convert_json_to_ros_message(self.msg_types[i], json_load)
-                    print(i,ros_msg)
+                    ros_msg = json_message_converter.convert_json_to_ros_message(self.msg_types[i], json_load,strict_mode=False)
                     self.bridge_publishers[i].publish(ros_msg)
                     self.get_logger().info(f"<ROS1->ROS2> publish {self.topic_names[i]}")
                 except json.JSONDecodeError as e:

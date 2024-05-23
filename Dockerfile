@@ -35,11 +35,13 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-ADD ./ros1_bridge_ws/src /root/ros1_bridge_ws/src
+COPY ./ros1_custom_msg /root/ros1_bridge_ws/src
+COPY ./ros1_bridge_ws/src/ros1_bridge /root/ros1_bridge_ws/src/ros1_bridge
 WORKDIR /root/ros1_bridge_ws
 RUN /bin/bash -c 'source /opt/ros/noetic/setup.bash && catkin build' 
 
-ADD ./ros2_bridge_ws/src /root/ros2_bridge_ws/src
+COPY ./ros2_custom_msg /root/ros2_bridge_ws/src
+COPY ./ros2_bridge_ws/src/ros2_bridge /root/ros2_bridge_ws/src/ros2_bridge
 WORKDIR /root/ros2_bridge_ws
 RUN /bin/bash -c 'source /opt/ros/galactic/setup.bash' &&\
     colcon build --cmake-clean-cache
