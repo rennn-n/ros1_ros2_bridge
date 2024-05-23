@@ -25,18 +25,7 @@ ros1_to_ros2:
   - name: /chatter # topic name
     ros1_type: std_msgs/String # ros1 msg type 
     ros2_type: std_msgs/msg/String # ros2 msg type 
-
-  - name: /points_raw
-    ros1_type: sensor_msgs/PointCloud2.msg
-    ros2_type:sensor_msgs/msg/PointCloud2.msg
-ros2_to_ros1:
-  - name: /chatter
-    ros1_type: std_msgs/String
-    ros2_type: std_msgs/msg/String
-
-  - name: /points_raw
-    ros1_type: sensor_msgs/PointCloud2.msg
-    ros2_type: sensor_msgs/msg/PointCloud2.msg
+~~~~~~
 ```
 
 
@@ -48,5 +37,8 @@ ROS_MASTER_URI=http://127.0.0.1:11311 #<-
 #ROS2
 ROS_DOMAIN_ID=1 #<-
 ROS_LOCALHOST_ONLY=0
+~~~~~
 ```
 
+## custom msg
+When you use custom messages, put pkg in ros1_custom_msg,ros2_custom_msg and do ```bash docker_tool/docker_build.sh```
