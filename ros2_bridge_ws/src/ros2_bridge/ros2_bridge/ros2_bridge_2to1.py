@@ -26,11 +26,11 @@ class Msg2JsonNode(Node):
             self.json_paths.append(json_path)
             with open(json_path, 'w'):
                 pass
-        self.get_logger().info("<ros2_bridge_2to1> init")
+        self.get_logger().info("init")
 
     def callback(self,msg,i) -> None:
         json_str = json_message_converter.convert_ros_message_to_json(msg)
-        self.get_logger().info(f"<ros2_bridge_2to1> subscrib {self.topic_names[i]}")
+        self.get_logger().info(f"<ROS2->ROS1>subscrib {self.topic_names[i]}")
         with open(self.json_paths[i], mode="w", encoding="utf-8") as f:
             json.dump(json_str, f)
 

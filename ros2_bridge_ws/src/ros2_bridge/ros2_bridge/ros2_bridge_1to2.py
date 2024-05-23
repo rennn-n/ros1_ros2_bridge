@@ -39,7 +39,9 @@ class Json2MsgNode(Node):
                 pass
             self.pre_modified.append(rtn_modified_time(json_path))
             self.create_timer(self.sleep_time, lambda i=i: self.callback(i))
-        self.get_logger().info("<ros2_bridge_1to2> init")
+        self.get_logger().info("init")
+        self.get_logger().info(f"rate={self.sleep_time}")
+
 
     def callback(self,i) -> None:
         
@@ -51,13 +53,13 @@ class Json2MsgNode(Node):
                     ros_msg = json_message_converter.convert_json_to_ros_message(self.msg_types[i], json_load)
                     print(i,ros_msg)
                     self.bridge_publishers[i].publish(ros_msg)
-                    self.get_logger().info(f"<ros1_bridge_2to1> publish {self.topic_names[i]}")
+                    self.get_logger().info(f"<ROS1->ROS2> publish {self.topic_names[i]}")
                 except json.JSONDecodeError as e:
-                    self.get_logger().error("<ros1_bridge_2to1> JSONDecodeError")
+                    self.get_logger().error("JSONDecodeError")
                 self.pre_modified[i] = rtn_modified_time(self.json_paths[i])
 
             except OSError as e:
-                self.get_logger().error("<ros1_bridge_2to1> can not open json!!!")
+                self.get_logger().error("can not open json!!!")
 
 
 def rtn_modified_time(file_path: str) -> dt.datetime:

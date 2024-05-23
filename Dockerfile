@@ -44,6 +44,8 @@ WORKDIR /root/ros2_bridge_ws
 RUN /bin/bash -c 'source /opt/ros/galactic/setup.bash' &&\
     colcon build --cmake-clean-cache
 
-COPY ./docker_tool/.add_bashrc /root/.add_bashrc
-RUN cat  /root/.add_bashrc >> /root/.bashrc
+COPY ./shell /root/shell
+RUN cat  /root/shell/.add_bashrc >> /root/.bashrc
+
+
 WORKDIR /root  

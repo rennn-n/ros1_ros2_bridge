@@ -38,7 +38,9 @@ class Json2MsgNode():
                 pass
             self.pre_modified.append(rtn_modified_time(json_path))
             rospy.Timer(rospy.Duration(self.sleep_time),  lambda event ,i=i: self.callback(event, i))
-        rospy.loginfo("<ros1_bridge_2to1> init")
+        rospy.loginfo(f"[ros1_bridge_2to1] rate={self.sleep_time}")
+        rospy.loginfo(f"[ros1_bridge_2to1] {' '.join(self.topic_names)}")
+        rospy.loginfo("[ros1_bridge_2to1] init")
 
     def callback(self,event,i) -> None:
         if self.pre_modified[i] != rtn_modified_time(self.json_paths[i]):
@@ -48,14 +50,14 @@ class Json2MsgNode():
                     json_load = json.load(json_open)
                     ros_msg = json_message_converter.convert_json_to_ros_message(self.msg_types[i], json_load)
                     self.bridge_publishers[i].publish(ros_msg)
-                    rospy.loginfo(f"<ros1_bridge_2to1> publish {self.topic_names[i]}")
+                    rospy.loginfo(f"[ros1_bridge_2to1] <ROS2->ROS1> publish {self.topic_names[i]}")
                     
                 except json.JSONDecodeError as e:
-                    rospy.logerr(f"<ros1_bridge_2to1> JSONDecodeError {self.topic_names[i]}")
+                    rospy.logerr(f"[ros1_bridge_2to1] <ROS2->ROS1> JSONDecodeError {self.topic_names[i]}")
                     rospy.logerr(e)
                 self.pre_modified[i] = rtn_modified_time(self.json_paths[i])
             except OSError as e:
-                rospy.logerr(f"<ros1_bridge_2to1> can not open json!!! {self.topic_names[i]}")
+                rospy.logerr(f"[ros1_bridge_2to1] <ROS2->ROS1> can not open json!!! {self.topic_names[i]}")
                 rospy.logerr(e)
 
 

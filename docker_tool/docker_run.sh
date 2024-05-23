@@ -11,7 +11,7 @@ docker rm -f ros1_ros2_bridge &>/dev/null
 
 cd  $(dirname $0)/..
 
-docker run -it  --net=host \
+docker run -itd --net=host \
     --name="ros1_ros2_bridge" \
     -v ./config.yaml:/config.yaml \
     -e ROS_IP=$ROS_IP \
