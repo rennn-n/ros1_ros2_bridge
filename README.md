@@ -22,8 +22,9 @@ If you want to change the topic you want to bridge, change the config.yaml
 ```yaml
 rate: 0.1 #refresh rate cycle
 ros1_to_ros2:
-  - name: /chatter # topic name
+  - ros1_name: /chatter # ros1 topic name
     ros1_type: std_msgs/String # ros1 msg type 
+    ros2_name: /chatter_ros2 # remap topic name
     ros2_type: std_msgs/msg/String # ros2 msg type 
 ~~~~~~
 ```
