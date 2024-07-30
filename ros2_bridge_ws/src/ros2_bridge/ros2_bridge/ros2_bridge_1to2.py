@@ -20,6 +20,8 @@ class Json2MsgNode(Node):
         with open(conf_path) as file:
             config = yaml.safe_load(file.read())
                 
+        os.environ['ROS_DOMAIN_ID'] = config["ROS_DOMAIN_ID"]
+        os.environ['ROS_LOCALHOST_ONLY'] = config["ROS_LOCALHOST_ONLY"]
         self.sleep_time = config["rate"]
 
         self.topic_names = []

@@ -1,5 +1,6 @@
 import json
 import yaml
+import os
 
 import rclpy
 from rclpy.node import Node
@@ -14,7 +15,8 @@ class Msg2JsonNode(Node):
         conf_path = "/config.yaml"
         with open(conf_path) as file:
             config = yaml.safe_load(file.read())
-        
+        os.environ['ROS_DOMAIN_ID'] = config["ROS_DOMAIN_ID"]
+        os.environ['ROS_LOCALHOST_ONLY'] = config["ROS_LOCALHOST_ONLY"]
         self.topic_names = []
         self.json_paths = []
 

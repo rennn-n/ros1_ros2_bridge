@@ -1,4 +1,13 @@
 rate: 0.1
+
+# ROS1 
+ROS_IP: 127.0.0.1
+ROS_MASTER_URI: http://127.0.0.1:11311
+#ROS2
+ROS_DOMAIN_ID: 1
+ROS_LOCALHOST_ONLY: 0
+
+#topic
 ros1_to_ros2:
   - ros1_name: /chatter
     ros1_type: std_msgs/String
