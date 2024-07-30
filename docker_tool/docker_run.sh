@@ -7,13 +7,13 @@ ROS_LOCALHOST_ONLY=0
 
 
 
-docker rm -f ros1_ros2_bridge &>/dev/null
+docker rm -f ros1_ros2_bridge_${1:-0} &>/dev/null
 
 cd  $(dirname $0)/..
 
 docker run -itd --net=host \
-    --name="ros1_ros2_bridge" \
-    -v ./config.yaml:/config.yaml \
+    --name="ros1_ros2_bridge${2:-0}" \
+    -v ./${1:-config.yaml}:/config.yaml \
     -e ROS_IP=$ROS_IP \
     -e ROS_MASTER_URI=$ROS_MASTER_URI \
     -e ROS_DOMAIN_ID=$ROS_DOMAIN_ID \

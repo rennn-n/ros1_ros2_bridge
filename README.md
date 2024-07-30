@@ -6,15 +6,15 @@ bash docker_tool/docker_build.sh
 ```
 run docker image (Run only once)
 ```bash
-bash docker_tool/docker_run.sh
+bash docker_tool/docker_run.sh (config:ocnfig.yaml) (name:0)
 ```
 ros1 to ros2 
 ```bash
-bash docker_tool/run_1to2.sh
+bash docker_tool/run_1to2.sh (name:0)
 ```
 ros2 to ros1 
 ```bash
-bash docker_tool/run_2to1.sh
+bash docker_tool/run_2to1.sh (name:0)
 ```
 ## Configuration
 
