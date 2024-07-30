@@ -27,10 +27,10 @@ class Json2MsgNode():
         self.json_paths = []
         self.pre_modified = []
         for i,topic in enumerate(config["ros2_to_ros1"]):
-            self.topic_names.append(topic["name"])
+            self.topic_names.append(topic["ros1_name"])
             self.msg_types.append(topic["ros1_type"])
             message_class = roslib.message.get_message_class(topic["ros1_type"])
-            self.bridge_publishers.append(rospy.Publisher(topic["name"],message_class,queue_size=1))
+            self.bridge_publishers.append(rospy.Publisher(topic["ros1_name"],message_class,queue_size=1))
 
             json_path = f"/dev/shm/bridge_2to1_{i}.json"
             self.json_paths.append(json_path)
