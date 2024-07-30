@@ -19,9 +19,9 @@ class Msg2JsonNode(Node):
         self.json_paths = []
 
         for i,topic in enumerate(config["ros2_to_ros1"]):
-            self.topic_names.append(topic["name"])
+            self.topic_names.append(topic["ros2_name"])
             message_class = get_message(topic["ros2_type"])
-            self.create_subscription(message_class, topic["name"], lambda msg ,i=i: self.callback(msg, i),rclpy.qos.qos_profile_sensor_data)
+            self.create_subscription(message_class, topic["ros2_name"], lambda msg ,i=i: self.callback(msg, i),rclpy.qos.qos_profile_sensor_data)
             json_path = f"/dev/shm/bridge_2to1_{i}.json"
             self.json_paths.append(json_path)
             with open(json_path, 'w'):

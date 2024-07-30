@@ -1,15 +1,23 @@
 rate: 0.1
 ros1_to_ros2:
-  - name: /chatter
+  - name: topic1
+    ros1_name: /chatter
     ros1_type: std_msgs/String
+    ros2_name: /chatter_ros2
     ros2_type: std_msgs/msg/String
-  - name: /points_raw
+  - name: topic2
+    ros1_name: /points_map
     ros1_type: sensor_msgs/PointCloud2
+    ros2_name: /points_map_ros2
     ros2_type: sensor_msgs/msg/PointCloud2
 ros2_to_ros1:
-  - name: /chatter
+  - name: topic1
+    ros1_name: /chatter
     ros1_type: std_msgs/String
+    ros2_name: /chatter_ros2
     ros2_type: std_msgs/msg/String
-  - name: /points_raw
+  - name: topic2
+    ros1_name: /points_map
     ros1_type: sensor_msgs/PointCloud2
+    ros2_name: /points_map_ros2
     ros2_type: sensor_msgs/msg/PointCloud2

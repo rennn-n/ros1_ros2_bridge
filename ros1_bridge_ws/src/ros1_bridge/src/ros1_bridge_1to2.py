@@ -20,7 +20,7 @@ class Msg2JsonNode():
         self.bridge_subscribers = []
         self.json_paths = []
         for i,topic in enumerate(config["ros1_to_ros2"]):
-            topic_name = topic["name"]
+            topic_name = topic["ros1_name"]
             self.topic_names.append(topic_name)
             message_class = roslib.message.get_message_class(topic["ros1_type"])
             self.bridge_subscribers.append(rospy.Subscriber(topic_name, message_class, self.callback, callback_args=i))
