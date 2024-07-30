@@ -10,13 +10,7 @@ from rospy_message_converter import json_message_converter
 
 
 class Msg2JsonNode():
-    def __init__(self) -> None:
-        conf_path = "/config.yaml"
-        with open(conf_path) as file:
-            config = yaml.safe_load(file.read())
-        
-        os.environ['ROS_IP'] = config["ROS_IP"]
-        os.environ['ROS_MASTER_URI'] = config["ROS_MASTER_URI"]
+    def __init__(self,config) -> None:
 
         self.topic_names = []
 
@@ -46,8 +40,15 @@ class Msg2JsonNode():
 
 def main(args=None):
     try:
+        conf_path = "/config.yaml"
+        with open(conf_path) as file:
+            config = yaml.safe_load(file.read())
+        
+        os.environ['ROS_IP'] = config["ROS_IP"]
+        os.environ['ROS_MASTER_URI'] = config["ROS_MASTER_URI"]
+        
         rospy.init_node("ros1_bridge_1to2",disable_signals=True)
-        detector = Msg2JsonNode()
+        detector = Msg2JsonNode(config)
         rospy.spin()
     except rospy.ROSInterruptException:
         return

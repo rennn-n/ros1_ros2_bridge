@@ -12,14 +12,7 @@ from rospy_message_converter import json_message_converter
 
 
 class Json2MsgNode():
-    def __init__(self) -> None:
-        conf_path = "/config.yaml"
-        with open(conf_path) as file:
-            config = yaml.safe_load(file.read())
-        
-        os.environ['ROS_IP'] = config["ROS_IP"]
-        os.environ['ROS_MASTER_URI'] = config["ROS_MASTER_URI"]
-        
+    def __init__(self,config) -> None:
         self.sleep_time = config["rate"]
 
         self.topic_num = len(config["ros2_to_ros1"])
@@ -63,7 +56,7 @@ class Json2MsgNode():
                 rospy.logerr(e)
 
 
-           
+
 
 def rtn_modified_time(file_path: str) -> dt.datetime:
     file_info = os.stat(file_path)
@@ -74,8 +67,15 @@ def rtn_modified_time(file_path: str) -> dt.datetime:
 
 def main(args=None):
     try:
+        conf_path = "/config.yaml"
+        with open(conf_path) as file:
+            config = yaml.safe_load(file.read())
+        
+        os.environ['ROS_IP'] = config["ROS_IP"]
+        os.environ['ROS_MASTER_URI'] = config["ROS_MASTER_URI"]
+        
         rospy.init_node("ros1_bridge_2to1",disable_signals=True)
-        detector = Json2MsgNode()
+        detector = Json2MsgNode(config)
         rospy.spin()
     except rospy.ROSInterruptException:
         return
