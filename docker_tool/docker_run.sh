@@ -7,7 +7,7 @@ ROS_LOCALHOST_ONLY=0
 
 
 
-docker rm -f ros1_ros2_bridge_${1:-0} &>/dev/null
+docker rm -f ros1_ros2_bridge_${2:-0} &>/dev/null
 
 cd  $(dirname $0)/..
 
