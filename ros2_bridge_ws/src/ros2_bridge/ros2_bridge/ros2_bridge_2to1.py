@@ -9,14 +9,9 @@ from rclpy_message_converter import json_message_converter
 from rosidl_runtime_py.utilities import get_message
 
 class Msg2JsonNode(Node):
-    def __init__(self) -> None:
+    def __init__(self,config) -> None:
         super().__init__("ros2_bridge_2to1")
 
-        conf_path = "/config.yaml"
-        with open(conf_path) as file:
-            config = yaml.safe_load(file.read())
-        os.environ['ROS_DOMAIN_ID'] = config["ROS_DOMAIN_ID"]
-        os.environ['ROS_LOCALHOST_ONLY'] = config["ROS_LOCALHOST_ONLY"]
         self.topic_names = []
         self.json_paths = []
 
@@ -44,8 +39,15 @@ def main(args=None):
     ----------
     """
     try:
+        conf_path = "/config.yaml"
+        with open(conf_path) as file:
+            config = yaml.safe_load(file.read())
+                
+        os.environ['ROS_DOMAIN_ID'] = str(config["ROS_DOMAIN_ID"])
+        os.environ['ROS_LOCALHOST_ONLY'] = str(config["ROS_LOCALHOST_ONLY"])
+
         rclpy.init(args=args)
-        node = Msg2JsonNode()
+        node = Msg2JsonNode(config)
         rclpy.spin(node)
     except KeyboardInterrupt:
         pass

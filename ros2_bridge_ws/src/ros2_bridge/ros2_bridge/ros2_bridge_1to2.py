@@ -13,15 +13,10 @@ from rosidl_runtime_py.utilities import get_message
 
 
 class Json2MsgNode(Node):
-    def __init__(self) -> None:
+    def __init__(self,config) -> None:
         super().__init__("ros2_bridge_1to2")
 
-        conf_path = "/config.yaml"
-        with open(conf_path) as file:
-            config = yaml.safe_load(file.read())
-                
-        os.environ['ROS_DOMAIN_ID'] = config["ROS_DOMAIN_ID"]
-        os.environ['ROS_LOCALHOST_ONLY'] = config["ROS_LOCALHOST_ONLY"]
+        
         self.sleep_time = config["rate"]
 
         self.topic_names = []
@@ -75,8 +70,15 @@ def main(args=None):
     ----------
     """
     try:
+        conf_path = "/config.yaml"
+        with open(conf_path) as file:
+            config = yaml.safe_load(file.read())
+                
+        os.environ['ROS_DOMAIN_ID'] = str(config["ROS_DOMAIN_ID"])
+        os.environ['ROS_LOCALHOST_ONLY'] = str(config["ROS_LOCALHOST_ONLY"])
+
         rclpy.init(args=args)
-        node = Json2MsgNode()
+        node = Json2MsgNode(config)
         rclpy.spin(node)
     except KeyboardInterrupt:
         pass
